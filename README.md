@@ -53,11 +53,95 @@ personal.auto.tfvars
 
 - **cтрока 29:** *resource "docker_image"* — отсутствует имя ресурса (должно быть "nginx");
 
-- **cтрока 34:** *resource "docker_container" "1nginx"* — имя ресурса начинается с цифры (недопустимо);
+- **cтрока 34:** *resource "docker_container" "1nginx"* — имя ресурса начинается с цифры (недопустимо, должно быть "nginx");
 
 - **cтрока 35:** *image = docker_image.nginx.image_id* — ссылается на несуществующий ресурс (нужно docker_image.nginx);
 
 - **cтрока 36:** *name = "example_${random_password.random_string_FAKE.resulT}"* — ссылается на несуществующий ресурс и неправильное имя переменной
+
+**Исправленный main.tf**
+
+```
+terraform {
+  required_providers {
+    docker = {
+      source  = "kreuzwerker/docker"
+    }
+  }
+  required_version = "~>1.12.0" /*Многострочный комментарий.
+ Требуемая версия terraform */
+}
+provider "docker" {}
+
+#однострочный комментарий
+
+resource "random_password" "random_string" {
+  length      = 16
+  special     = false
+  min_upper   = 1
+  min_lower   = 1
+  min_numeric = 1
+}
+
+resource "docker_image" "nginx" {
+  name         = "nginx:latest"
+  keep_locally = true
+}
+
+resource "docker_container" "nginx" {
+  image = docker_image.nginx.image_id
+  name  = "example_${random_password.random_string.result}"
+
+  ports {
+    internal = 80
+    external = 9090
+  }
+}
+```
+`4.Замените имя docker-контейнера в блоке кода на hello_world. Не перепутайте имя контейнера и имя образа`
+
+```
+terraform {
+  required_providers {
+    docker = {
+      source  = "kreuzwerker/docker"
+    }
+  }
+  required_version = ">=1.12.0" 
+}
+provider "docker" {}
+
+resource "random_password" "random_string" {
+  length      = 16
+  special     = false
+  min_upper   = 1
+  min_lower   = 1
+  min_numeric = 1
+}
+
+resource "docker_image" "nginx" {
+  name         = "nginx:latest"
+  keep_locally = true
+}
+
+resource "docker_container" "nginx" {
+  image = docker_image.nginx.image_id
+  name  = "hello_world"
+
+  ports {
+    internal = 80
+    external = 9090
+  }
+}
+```
+`Объясните своими словами, в чём может быть опасность применения ключа -auto-approve. Догадайтесь или нагуглите зачем может пригодиться данный ключ?`
+
+Ключ -auto-approve опасен тем, что применяет изменения без запроса подтверждения. Это может привести к случайному удалению важных ресурсов и невозможности проверить план изменений перед применением.
+
+Ключ -auto-approve применяется, когда нужно запустить Terraform автоматически, без участия человека. Например, в системах автоматической сборки и развертывания, где некому вводить "yes" вручную.
+
+<img width="964" height="155" alt="Снимок экрана 2026-03-02 в 23 20 00" src="https://github.com/user-attachments/assets/488bf7d5-b40d-4d7d-915f-84c1fda7158a" />
+
 
 
 ---
