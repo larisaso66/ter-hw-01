@@ -18,7 +18,9 @@
 # own secret vars store.
 personal.auto.tfvars
 ```
-2. В state-файле секретное содержимое ресурса random_password хранится в ключе result со значением "ebPW5GQDtl2lcVbx"
+`2. Найдите в state-файле секретное содержимое созданного ресурса random_password, пришлите в качестве ответа конкретный ключ и его значение`
+
+В state-файле секретное содержимое ресурса random_password хранится в ключе result со значением "ebPW5GQDtl2lcVbx"
    
 ```
    {
@@ -47,6 +49,9 @@ personal.auto.tfvars
             "upper": true
           },
 ```
+`3. Объясните, в чём заключаются намеренно допущенные ошибки. Исправьте их`
+
+
 
 ---
 
