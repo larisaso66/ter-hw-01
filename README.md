@@ -142,6 +142,12 @@ resource "docker_container" "nginx" {
 
 <img width="964" height="155" alt="Снимок экрана 2026-03-02 в 23 20 00" src="https://github.com/user-attachments/assets/488bf7d5-b40d-4d7d-915f-84c1fda7158a" />
 
+`5. Уничтожьте созданные ресурсы с помощью terraform. Убедитесь, что все ресурсы удалены`
+
+<img width="964" height="280" alt="Снимок экрана 2026-03-02 в 23 29 16" src="https://github.com/user-attachments/assets/83a8636a-4e98-4ec4-b27c-91d82ee3bf89" />
+
+`6. Объясните, почему при этом не был удалён docker-образ nginx:latest`
+
 
 
 ---
