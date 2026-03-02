@@ -18,7 +18,35 @@
 # own secret vars store.
 personal.auto.tfvars
 ```
-
+2. В state-файле секретное содержимое ресурса random_password хранится в ключе result со значением "ebPW5GQDtl2lcVbx"
+   
+```
+   {
+      "mode": "managed",
+      "type": "random_password",
+      "name": "random_string",
+      "provider": "provider[\"registry.terraform.io/hashicorp/random\"]",
+      "instances": [
+        {
+          "schema_version": 3,
+          "attributes": {
+            "bcrypt_hash": "$2a$10$AALDwHXfqUklsq.tibtvUO/r9Nmj6HyPWCPoZVj/VpgcsT7G7hk.2",
+            "id": "none",
+            "keepers": null,
+            "length": 16,
+            "lower": true,
+            "min_lower": 1,
+            "min_numeric": 1,
+            "min_special": 0,
+            "min_upper": 1,
+            "number": true,
+            "numeric": true,
+            "override_special": null,
+            "result": "ebPW5GQDtl2lcVbx",
+            "special": false,
+            "upper": true
+          },
+```
 
 ---
 
