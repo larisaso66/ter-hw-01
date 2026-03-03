@@ -39,9 +39,9 @@ personal.auto.tfvars
 ```
 `3. Объясните, в чём заключаются намеренно допущенные ошибки main.tf. Исправьте их`
 
-- **cтрока 29:** *resource "docker_image"* — отсутствует имя ресурса (должно быть "nginx");
+- **cтрока 29:** *resource "docker_image"* — отсутствует имя ресурса (должно быть nginx);
 
-- **cтрока 34:** *resource "docker_container" "1nginx"* — имя ресурса начинается с цифры (недопустимо, должно быть "nginx");
+- **cтрока 34:** *resource "docker_container" "1nginx"* — имя ресурса начинается с цифры (недопустимо, должно быть nginx);
 
 - **cтрока 35:** *image = docker_image.nginx.image_id* — ссылается на несуществующий ресурс (нужно docker_image.nginx);
 
