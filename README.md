@@ -148,7 +148,9 @@ resource "docker_container" "nginx" {
 
 `6. Объясните, почему при этом не был удалён docker-образ nginx:latest`
 
+Образ nginx:latest не удалился, потому что в **docker_image.nginx** указан параметр *keep_locally = true*
 
+ Соглано документации terraform провайдера docker: *"keep_locally - (Boolean) If true, then the Docker image won't be deleted on destroy operation. If this is false, it will delete the image from the docker local storage on destroy operation"*
 
 ---
 
