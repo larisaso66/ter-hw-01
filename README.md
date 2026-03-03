@@ -65,7 +65,7 @@ personal.auto.tfvars
 
 `5. Уничтожьте созданные ресурсы с помощью terraform. Убедитесь, что все ресурсы удалены`
 
-<img width="964" height="280" alt="Снимок экрана 2026-03-02 в 23 29 16" src="https://github.com/user-attachments/assets/83a8636a-4e98-4ec4-b27c-91d82ee3bf89" />
+[Ссылка на terraform.tfstate после destroy](https://github.com/larisaso66/ter-hw-01/blob/main/src/terraform.tfstate_destroy)
 
 `6. Объясните, почему при этом не был удалён docker-образ nginx:latest`
 
