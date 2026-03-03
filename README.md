@@ -23,31 +23,19 @@ personal.auto.tfvars
 В state-файле секретное содержимое ресурса random_password хранится в ключе result со значением "ebPW5GQDtl2lcVbx"
    
 ```
-   {
-      "mode": "managed",
-      "type": "random_password",
-      "name": "random_string",
-      "provider": "provider[\"registry.terraform.io/hashicorp/random\"]",
-      "instances": [
-        {
-          "schema_version": 3,
-          "attributes": {
-            "bcrypt_hash": "$2a$10$AALDwHXfqUklsq.tibtvUO/r9Nmj6HyPWCPoZVj/VpgcsT7G7hk.2",
-            "id": "none",
-            "keepers": null,
-            "length": 16,
-            "lower": true,
-            "min_lower": 1,
-            "min_numeric": 1,
-            "min_special": 0,
-            "min_upper": 1,
-            "number": true,
-            "numeric": true,
-            "override_special": null,
-            "result": "ebPW5GQDtl2lcVbx",
-            "special": false,
-            "upper": true
-          },
+{
+  "type": "random_password",
+  "name": "random_string",
+  "instances": [
+    {
+      "attributes": {
+        "result": "ebPW5GQDtl2lcVbx",
+        "special": false,
+        "upper": true
+      }
+    }
+  ]
+}
 ```
 `3. Объясните, в чём заключаются намеренно допущенные ошибки main.tf. Исправьте их`
 
@@ -59,45 +47,8 @@ personal.auto.tfvars
 
 - **cтрока 36:** *name = "example_${random_password.random_string_FAKE.resulT}"* — ссылается на несуществующий ресурс и неправильное имя переменной
 
-**Исправленный main.tf**
+[Ссылка на main.tf](https://github.com/larisaso66/ter-hw-01/blob/main/src/main.tf)
 
-```
-terraform {
-  required_providers {
-    docker = {
-      source  = "kreuzwerker/docker"
-    }
-  }
-  required_version = "~>1.12.0" /*Многострочный комментарий.
- Требуемая версия terraform */
-}
-provider "docker" {}
-
-#однострочный комментарий
-
-resource "random_password" "random_string" {
-  length      = 16
-  special     = false
-  min_upper   = 1
-  min_lower   = 1
-  min_numeric = 1
-}
-
-resource "docker_image" "nginx" {
-  name         = "nginx:latest"
-  keep_locally = true
-}
-
-resource "docker_container" "nginx" {
-  image = docker_image.nginx.image_id
-  name  = "example_${random_password.random_string.result}"
-
-  ports {
-    internal = 80
-    external = 9090
-  }
-}
-```
 `4.Замените имя docker-контейнера в блоке кода на hello_world. Не перепутайте имя контейнера и имя образа`
 
 ```
